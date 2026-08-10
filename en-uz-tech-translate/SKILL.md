@@ -27,6 +27,13 @@ Always use the letters **ş, ç, ğ, õ** in Uzbek output — never their digrap
 
 Apply this consistently across every sentence, heading, and code comment that gets translated. Do not silently fall back to apostrophe-based or digraph spelling even if the source material or a pasted example uses it.
 
+### Sub-rules
+
+1. **Drop the modifier apostrophe (ʼ) entirely from native/assimilated Uzbek words.** Never write `ʼ`. `eʼlon` → `elon`, `yaʼni` → `yani`, `maʼno` → `mano`.
+2. **Disambiguate homonym collisions with a doubled vowel, not with `ʼ`.** If dropping `ʼ` from a word would make it identical to an unrelated existing word, double the vowel that used to carry the `ʼ` instead of restoring the mark: `tana` (body) stays `tana`; `taʼna` (reproach) becomes `taana`. Only do this where a real collision exists — don't double vowels speculatively. Log every such pair the first time it comes up in a translation, in a **Homonimlar** table in `references/glossary.md` (source word, doubled-vowel form, its meaning, and the plain form's meaning), and ask the user for a ruling if it's unclear which of two candidate readings applies.
+3. **`h` for Uzbek words, `x` only for foreign words.** Every word that functions as native/assimilated Uzbek vocabulary is spelled with `h`, never `x`. `x` is reserved for words that stay recognizably foreign/loaned (e.g. `sxema`, `taxi`-type borrowings, proper nouns). When a word's status is genuinely unclear (long-assimilated Arabic/Persian loans are the usual gray area), don't silently pick one — flag it and ask the user, then log the ruling in the glossary so it's consistent afterward.
+4. **Use a plain single quote (`'`) only at a foreign-word/Uzbek-suffix boundary**, never inside a fully Uzbek word. `rust` + `ning` → `rust'ning`; `ownership` + `ga` → `ownership'ga`. This is a different mark from rule 1's `ʼ` — rule 1 is about dropping an orthographic mark from Uzbek-origin words, this rule is about attaching a Uzbek grammatical suffix to a term that's being kept in its original (usually English) spelling.
+
 ## Zed-Specific Workflow
 
 1. **Locate the source file inside the Zed workspace.** Prefer files already open in a Zed tab or present in the project tree over fetching from the web. If the user references an external repo or book not yet in the workspace, ask them to open/add it in Zed, or fetch it and note that it should be added to the project so Zed's file tree and diffing stay useful.
@@ -54,6 +61,9 @@ Apply this consistently across every sentence, heading, and code comment that ge
    - All code blocks are untouched (diff against the original if possible)
    - Terminology is consistent within the file and with previously translated files in the project
    - The ş/ç/ğ/õ orthography rule was applied consistently
+   - No `ʼ` remains anywhere in the output, except where a logged homonym pair required a doubled vowel instead (rule 2)
+   - No native/assimilated Uzbek word uses `x`; `x` appears only in words kept as foreign (rule 3)
+   - Every `'` in the text sits at a foreign-word/Uzbek-suffix boundary, not inside an Uzbek word (rule 4)
    - Heading hierarchy (`#`, `##`, `###`) matches the source
 
 ## Multi-Chapter / Multi-File Projects
